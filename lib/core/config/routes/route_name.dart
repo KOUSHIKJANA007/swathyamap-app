@@ -5,4 +5,11 @@ class RouteName {
   static final String signUpScreen = 'register';
   static final String splashScreen = 'splash';
   static final String otpVerifyScreen = 'otp-verify';
+
+  static final String homeScreen = 'home';
+  static final String institutionScreen = 'institution';
+  static final String doctorScreen = 'doctor';
+  static final String appointmentScreen = 'appointment';
+  static final String appMenuScreen = 'app_menu';
+  static final String searchScreen = 'search';
 }

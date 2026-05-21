@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:swasthyamap/core/config/routes/route_name.dart';
+import 'package:swasthyamap/feature/app_menu/presentation/pages/app_menu_screen.dart';
 import 'package:swasthyamap/feature/auth/presentation/pages/login_screen.dart';
 import 'package:swasthyamap/feature/auth/presentation/pages/otp_verify_screen.dart';
 import 'package:swasthyamap/feature/auth/presentation/pages/sign_up_screen.dart';
 import 'package:swasthyamap/feature/auth/presentation/pages/splash_screen.dart';
+import 'package:swasthyamap/feature/dashboard/presentation/pages/home.dart';
+import 'package:swasthyamap/feature/dashboard/presentation/pages/search_screen.dart';
+import 'package:swasthyamap/feature/doctor/presentation/pages/doctor_appointment.dart';
+import 'package:swasthyamap/feature/institution/presentation/pages/institutions_screen.dart';
+import 'package:swasthyamap/navigation_bar_layout.dart';
 import '../../services/auth_service/auth_session_service.dart';
 
 class AppRoutes {
@@ -15,6 +21,60 @@ class AppRoutes {
     router = GoRouter(
         initialLocation: '/',
         routes: [
+          ShellRoute(
+            builder: (context, state, child) {
+              return NavigationBarLayout(child: child);
+            },
+
+            routes: [
+              GoRoute(
+                name: RouteName.homeScreen,
+                path: '/${RouteName.homeScreen}',
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                      child: Home()
+                  );
+                },
+              ),
+              GoRoute(
+                name: RouteName.institutionScreen,
+                path: '/${RouteName.institutionScreen}',
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                      child: InstitutionsScreen()
+                  );
+                },
+              ),
+
+              GoRoute(
+                name: RouteName.searchScreen,
+                path: '/${RouteName.searchScreen}',
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                      child: SearchScreen()
+                  );
+                },
+              ),
+              GoRoute(
+                name: RouteName.appointmentScreen,
+                path: '/${RouteName.appointmentScreen}',
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                      child: DoctorAppointment()
+                  );
+                },
+              ),
+              GoRoute(
+                name: RouteName.appMenuScreen,
+                path: '/${RouteName.appMenuScreen}',
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                      child: AppMenuScreen()
+                  );
+                },
+              ),
+            ],
+          ),
           GoRoute(
             name: RouteName.splashScreen,
             path: '/',

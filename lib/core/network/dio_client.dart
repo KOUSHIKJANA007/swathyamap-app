@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:swasthyamap/core/network/dio_token_refresh_interceptor.dart';
 import '../services/auth_service/auth_session_service.dart';
 import 'dio_helper.dart';
 import 'dio_logging_interceptor.dart';
@@ -9,11 +10,12 @@ class DioClient {
   final Dio _dio;
   final AuthSessionService _authSessionService;
   final DioLoggingInterceptor dioLoggingInterceptor;
+  final DioTokenRefreshInterceptor dioTokenRefreshInterceptor;
 
   DioClient({
     required Dio dio,
     required AuthSessionService authSessionService,
-    required this.dioLoggingInterceptor,
+    required this.dioLoggingInterceptor, required this.dioTokenRefreshInterceptor,
   }) : _dio = dio,
        _authSessionService = authSessionService {
     _dio.options = BaseOptions(
@@ -28,6 +30,7 @@ class DioClient {
 
 
     _dio.interceptors.add(dioLoggingInterceptor);
+    _dio.interceptors.add(dioTokenRefreshInterceptor);
   }
 
   // ── Auth header ────────────────────────────────────────────────────────────

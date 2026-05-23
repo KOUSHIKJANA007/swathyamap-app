@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -95,6 +96,9 @@ class _AppTextInputFieldState extends State<AppTextInputField> {
         const SizedBox(height: 4),
         TextFormField(
           validator: (val){
+            if(widget.type == TextInputType.emailAddress && !EmailValidator.validate(val??'')){
+              return "${widget.label} is invalid.";
+            }
             if(widget.isRequired && (val==null || val.isEmpty)){
               return "${widget.label} is required";
             }else{

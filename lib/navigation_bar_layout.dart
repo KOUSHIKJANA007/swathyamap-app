@@ -83,13 +83,12 @@ class NavigationBarLayout extends StatelessWidget {
     return AppScaffold(
       body: child,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      extendBody: true,
-      bottomNavigationBar: SafeArea(
+      floatingActionButton: SafeArea(
         child: AppContainer(
           height: 56,
           padding: EdgeInsets.all(12),
           margin: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-          color: AppColor.primaryColor.withAlpha(204),
+          color: AppColor.primaryColor,
           borderRadius: 24,
           boxShadow: [
             BoxShadow(

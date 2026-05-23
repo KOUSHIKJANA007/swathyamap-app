@@ -9,4 +9,5 @@ class AppVector {
   static const String searchIcon = '${basePath}search$format';
   static const String instituteIcon = '${basePath}institute$format';
   static const String menuIcon = '${basePath}menu$format';
+  static const String searchIcon2 = '${basePath}search_icon$format';
 }

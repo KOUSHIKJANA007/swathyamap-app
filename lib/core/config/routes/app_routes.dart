@@ -12,6 +12,9 @@ import 'package:swasthyamap/feature/doctor/presentation/pages/doctor_appointment
 import 'package:swasthyamap/feature/institution/presentation/pages/institutions_screen.dart';
 import 'package:swasthyamap/navigation_bar_layout.dart';
 import '../../services/auth_service/auth_session_service.dart';
+bool isSplashInitComplete = false;
+String? pendingDeepLinkPath;
+
 
 class AppRoutes {
   late final GoRouter router;
@@ -19,6 +22,17 @@ class AppRoutes {
 
   AppRoutes({required this.authSessionService}) {
     router = GoRouter(
+        redirect: (context, state) async {
+          if (!isSplashInitComplete) {
+            final currentPath = state.uri.path;
+
+            if (currentPath != '/') {
+              pendingDeepLinkPath = state.uri.toString();
+            }
+            return '/';
+          }
+          return null;
+        },
         initialLocation: '/',
         routes: [
           ShellRoute(

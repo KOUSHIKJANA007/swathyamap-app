@@ -10,7 +10,7 @@ class AppContainer extends StatelessWidget {
     this.padding,
     this.margin,
     this.height,
-    this.width, this.onTap, this.border, this.clip=Clip.none, this.constraints, this.image, this.onTapDown,
+    this.width, this.onTap, this.border, this.clip=Clip.none, this.constraints, this.image, this.onTapDown, this.gradient,
   });
 
   final double borderRadius;
@@ -27,6 +27,7 @@ class AppContainer extends StatelessWidget {
   final Clip clip;
   final BoxConstraints? constraints;
   final DecorationImage? image;
+  final Gradient? gradient;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,7 @@ class AppContainer extends StatelessWidget {
           border: border,
           color: color,
           boxShadow: boxShadow,
+          gradient: gradient
         ),
         child: child,
       ),

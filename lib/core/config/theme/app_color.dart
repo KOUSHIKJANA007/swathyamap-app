@@ -8,4 +8,6 @@ class AppColor {
   static const lightGrayColor = Color(0xffC4C4C4);
   static const headingTextColor = Color(0xff333333);
   static const subTextColor = Color(0xff677294);
+  static const starGoldenColor = Color(0xffF6D060);
+  static const starSilverColor = Color(0xffE2E5EA);
 }

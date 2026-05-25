@@ -24,6 +24,7 @@ class DioTokenRefreshInterceptor extends Interceptor {
       DioException err,
       ErrorInterceptorHandler handler,
       ) async {
+
     if (err.response?.statusCode != 401) {
       return handler.next(err);
     }

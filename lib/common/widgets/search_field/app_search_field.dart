@@ -13,7 +13,7 @@ class AppSearchField extends StatefulWidget {
     this.readOnly=false,
     super.key,
     this.hintText, this.prefixIcon,
-    this.isObscureText = false, this.suffixIcon, this.validator, this.controller
+    this.isObscureText = false, this.suffixIcon, this.validator, this.controller, this.onTap
   });
   final double borderRadius;
   final EdgeInsetsGeometry? innerPadding;
@@ -27,6 +27,7 @@ class AppSearchField extends StatefulWidget {
   final Widget? suffixIcon;
   final FormFieldValidator<String?>? validator;
   final TextEditingController? controller;
+  final VoidCallback? onTap;
   @override
   State<AppSearchField> createState() => _AppSearchFieldState();
 }
@@ -37,6 +38,7 @@ class _AppSearchFieldState extends State<AppSearchField> {
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: widget.onChange,
+      onTap: widget.onTap,
       decoration: InputDecoration(
         enabled: !widget.readOnly,
         contentPadding: widget.innerPadding,

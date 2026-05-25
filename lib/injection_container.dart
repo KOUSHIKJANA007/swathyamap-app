@@ -13,6 +13,11 @@ import 'package:swasthyamap/feature/auth/domain/repository/auth_repository.dart'
 import 'package:swasthyamap/feature/auth/domain/usecases/do_login_use_case.dart';
 import 'package:swasthyamap/feature/auth/domain/usecases/find_logged_in_user_use_case.dart';
 import 'package:swasthyamap/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:swasthyamap/feature/search_services/data/datasource/search_remote_datasource.dart';
+import 'package:swasthyamap/feature/search_services/data/repository/search_repository_impl.dart';
+import 'package:swasthyamap/feature/search_services/domain/repository/search_repository.dart';
+import 'package:swasthyamap/feature/search_services/domain/usecases/search_doctor_use_case.dart';
+import 'package:swasthyamap/feature/search_services/presentation/bloc/search_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -49,6 +54,17 @@ Future<void> initDependency() async {
       doLoginUseCase: sl(),
       findLoggedInUserUseCase: sl(),
       authSessionService: sl(),
+    ),
+  );
+
+  //Auth
+  sl.registerLazySingleton<SearchRemoteDatasource>(
+        () => SearchRemoteDatasourceImpl(sl()),
+  );
+  sl.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(sl()));
+  sl.registerLazySingleton(() => SearchDoctorUseCase(sl()));
+  sl.registerFactory(
+        () => SearchBloc(searchDoctorUseCase: sl()
     ),
   );
 }

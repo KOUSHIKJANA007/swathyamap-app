@@ -10,4 +10,11 @@ class AppVector {
   static const String instituteIcon = '${basePath}institute$format';
   static const String menuIcon = '${basePath}menu$format';
   static const String searchIcon2 = '${basePath}search_icon$format';
+
+  //Dashboard
+  static const String dentistIcon = '${basePath}dentist_icon$format';
+  static const String gynecologistIcon = '${basePath}gynecologist_icon$format';
+  static const String ophthalmologistIcon = '${basePath}ophthalmologist_icon$format';
+  static const String cardiologistIcon = '${basePath}cardiologist_icon$format';
+
 }

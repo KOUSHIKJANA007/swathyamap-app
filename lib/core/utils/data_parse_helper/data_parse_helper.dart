@@ -6,6 +6,25 @@ class DataParseHelper {
     return parsed ?? DateTime.now();
   }
 
+  static DateTime? parseTime(String? time) {
+    if (time == null || time.trim().isEmpty) {
+      return null;
+    }
+    try {
+      final now = DateTime.now();
+      final parts = time.split(':');
+      return DateTime(
+        now.year,
+        now.month,
+        now.day,
+        int.parse(parts[0]),
+        int.parse(parts[1]),
+        int.parse(parts[2]),
+      );
+    } catch (e) {
+      return null;
+    }
+  }
   static DateTime? getDateOrNull(dynamic value) {
     if (value == null) return null;
     if (value is DateTime) return value;
@@ -18,6 +37,11 @@ class DataParseHelper {
   static int safeInt(dynamic value) {
     if (value is int) return value;
     return int.tryParse(value?.toString() ?? '') ?? 0;
+  }
+
+  static double safeDouble(dynamic value) {
+    if (value is double) return value;
+    return double.tryParse(value?.toString() ?? '') ?? 0.0;
   }
 
   static List<T> safeList<T>(

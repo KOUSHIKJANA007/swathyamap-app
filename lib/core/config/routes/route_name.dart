@@ -12,4 +12,5 @@ class RouteName {
   static final String appointmentScreen = 'appointment';
   static final String appMenuScreen = 'app_menu';
   static final String searchScreen = 'search';
+  static final String searchFilterScreen = 'search-filter';
 }

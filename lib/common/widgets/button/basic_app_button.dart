@@ -8,7 +8,7 @@ class BasicAppButton extends StatelessWidget {
   const BasicAppButton({super.key, required this.buttonName, required this.onTap,
     this.padding = const EdgeInsets.symmetric(vertical: 15),
     this.borderRadius = 12.0,
-    this.btnNameSize = 18.0
+    this.btnNameSize = 18.0, this.icon
   });
 
   final String buttonName;
@@ -16,9 +16,11 @@ class BasicAppButton extends StatelessWidget {
   final EdgeInsets padding;
   final double borderRadius;
   final double btnNameSize;
+  final Icon? icon;
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return ElevatedButton.icon(
+      icon: icon,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius)
@@ -26,7 +28,7 @@ class BasicAppButton extends StatelessWidget {
           padding: padding
         ),
         onPressed: onTap,
-        child: AppTextWidget(text: buttonName,fontWeight: FontWeight.w500,fontSize: btnNameSize,color: AppColor.lightBgColor)
+        label: AppTextWidget(text: buttonName,fontWeight: FontWeight.w500,fontSize: btnNameSize,color: AppColor.lightBgColor)
     );
   }
 }

@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+    <string>Swasthya Map uses the camera so you can take and share photos directly in your team chats.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Swasthya Map uses your photo library so you can select and upload images to your chats.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need your location to find nearby doctors.</string>
 </dict>
 </plist>

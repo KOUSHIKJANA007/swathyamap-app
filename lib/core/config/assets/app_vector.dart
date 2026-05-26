@@ -17,4 +17,7 @@ class AppVector {
   static const String ophthalmologistIcon = '${basePath}ophthalmologist_icon$format';
   static const String cardiologistIcon = '${basePath}cardiologist_icon$format';
 
+  static const String pickCameraIcon = '${basePath}profile_pick_camera_icon$format';
+  static const String pickGalleryIcon = '${basePath}profile_pick_gallery_icon$format';
+
 }

@@ -17,7 +17,8 @@ import '../../../../core/config/theme/app_color.dart';
 import '../../../../core/utils/debounce/debounce.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  const SearchScreen({super.key, this.specialization});
+  final String? specialization;
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -33,12 +34,17 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
+    List<String> specialization = [];
+    if(widget.specialization!=null){
+      filterData = {'specialization':[widget.specialization]};
+      specialization = [widget.specialization!];
+    }
     context.read<SearchBloc>().add(
       SearchDoctor(
         latitude: 22.33,
         longitude: 87.32,
         search: '',
-        specialization: [],
+        specialization: specialization,
         dayOfWeek: '',
         lastDistance: 0,
         limit: 30,

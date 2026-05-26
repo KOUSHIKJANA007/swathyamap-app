@@ -7,12 +7,19 @@ import 'package:swasthyamap/core/network/dio_logging_interceptor.dart';
 import 'package:swasthyamap/core/network/dio_token_refresh_interceptor.dart';
 import 'package:swasthyamap/core/services/auth_service/auth_session_service.dart';
 import 'package:swasthyamap/core/services/auth_service/local_auth_storage_service.dart';
+import 'package:swasthyamap/core/services/image_service/image_picker_service.dart';
 import 'package:swasthyamap/feature/auth/data/datasource/auth_remote_datasource.dart';
 import 'package:swasthyamap/feature/auth/data/repository/auth_repository_impl.dart';
 import 'package:swasthyamap/feature/auth/domain/repository/auth_repository.dart';
 import 'package:swasthyamap/feature/auth/domain/usecases/do_login_use_case.dart';
 import 'package:swasthyamap/feature/auth/domain/usecases/find_logged_in_user_use_case.dart';
 import 'package:swasthyamap/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:swasthyamap/feature/institution/data/datasource/institute_remote_datasource.dart';
+import 'package:swasthyamap/feature/institution/data/repository/institute_repository_impl.dart';
+import 'package:swasthyamap/feature/institution/domain/repository/institute_repository.dart';
+import 'package:swasthyamap/feature/institution/domain/usecases/create_institute_use_case.dart';
+import 'package:swasthyamap/feature/institution/domain/usecases/find_institutes_by_owner_use_case.dart';
+import 'package:swasthyamap/feature/institution/presentation/bloc/institute_bloc.dart';
 import 'package:swasthyamap/feature/search_services/data/datasource/search_remote_datasource.dart';
 import 'package:swasthyamap/feature/search_services/data/repository/search_repository_impl.dart';
 import 'package:swasthyamap/feature/search_services/domain/repository/search_repository.dart';
@@ -23,6 +30,7 @@ final sl = GetIt.instance;
 
 Future<void> initDependency() async {
   sl.registerLazySingleton(() => const FlutterSecureStorage());
+  sl.registerLazySingleton(() => ImagePickerService());
   sl.registerLazySingleton(() => LocalAuthStorageService(sl()));
   sl.registerLazySingleton<AuthSessionService>(
     () => AuthSessionServiceImpl(sl()),
@@ -65,6 +73,18 @@ Future<void> initDependency() async {
   sl.registerLazySingleton(() => SearchDoctorUseCase(sl()));
   sl.registerFactory(
         () => SearchBloc(searchDoctorUseCase: sl()
+    ),
+  );
+
+  //Auth
+  sl.registerLazySingleton<InstituteRemoteDatasource>(
+        () => InstituteRemoteDatasourceImpl(sl()),
+  );
+  sl.registerLazySingleton<InstituteRepository>(() => InstituteRepositoryImpl(sl()));
+  sl.registerLazySingleton(() => FindInstitutesByOwnerUseCase(sl()));
+  sl.registerLazySingleton(() => CreateInstituteUseCase(sl()));
+  sl.registerFactory(
+        () => InstituteBloc(findInstitutesByOwnerUseCase: sl(), createInstituteUseCase: sl()
     ),
   );
 }

@@ -8,6 +8,10 @@ import 'package:swasthyamap/feature/auth/presentation/pages/otp_verify_screen.da
 import 'package:swasthyamap/feature/auth/presentation/pages/sign_up_screen.dart';
 import 'package:swasthyamap/feature/auth/presentation/pages/splash_screen.dart';
 import 'package:swasthyamap/feature/dashboard/presentation/pages/home.dart';
+import 'package:swasthyamap/feature/institution/domain/entities/institute_res_dto.dart';
+import 'package:swasthyamap/feature/institution/presentation/bloc/institute_bloc.dart';
+import 'package:swasthyamap/feature/institution/presentation/pages/add_institute_screen.dart';
+import 'package:swasthyamap/feature/institution/presentation/pages/institute_details.dart';
 import 'package:swasthyamap/feature/search_services/presentation/pages/search_filter.dart';
 import 'package:swasthyamap/feature/search_services/presentation/pages/search_screen.dart';
 import 'package:swasthyamap/feature/doctor/presentation/pages/doctor_appointment.dart';
@@ -60,19 +64,44 @@ class AppRoutes {
                 path: '/${RouteName.institutionScreen}',
                 pageBuilder: (context, state) {
                   return MaterialPage(
-                      child: InstitutionsScreen()
+                      child: BlocProvider(
+                        create: (context) => sl<InstituteBloc>(),
+                        child: InstitutionsScreen(),
+                      )
                   );
                 },
               ),
-
+              GoRoute(
+                name: RouteName.addInstituteScreen,
+                path: '/${RouteName.addInstituteScreen}',
+                pageBuilder: (context, state) {
+                  return MaterialPage(
+                      child: BlocProvider(
+                        create: (context) => sl<InstituteBloc>(),
+                        child: AddInstituteScreen(),
+                      )
+                  );
+                },
+              ),
+              GoRoute(
+                name: RouteName.instituteDetailsScreen,
+                path: '/${RouteName.instituteDetailsScreen}',
+                pageBuilder: (context, state) {
+                  final data = state.extra as InstituteResDto;
+                  return MaterialPage(
+                      child: InstituteDetails(institute: data)
+                  );
+                },
+              ),
               GoRoute(
                 name: RouteName.searchScreen,
                 path: '/${RouteName.searchScreen}',
                 pageBuilder: (context, state) {
+                  final data = state.extra as String?;
                   return MaterialPage(
                       child: BlocProvider(
                         create: (context) => sl<SearchBloc>(),
-                        child: SearchScreen(),
+                        child: SearchScreen(specialization: data),
                       )
                   );
                 },

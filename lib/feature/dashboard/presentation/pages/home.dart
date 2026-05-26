@@ -33,6 +33,7 @@ class _HomeState extends State<Home> {
 
   List<Map<String, dynamic>> quickList = [
     {
+      'specialization': 'Dentist', 
       'icon': AppVector.dentistIcon,
       'color': LinearGradient(
         begin: Alignment.topLeft,
@@ -41,6 +42,7 @@ class _HomeState extends State<Home> {
       ),
     },
     {
+      'specialization': 'Cardiologist',
       'icon': AppVector.cardiologistIcon,
       'color': LinearGradient(
         begin: Alignment.topLeft,
@@ -49,6 +51,7 @@ class _HomeState extends State<Home> {
       ),
     },
     {
+      'specialization': 'ophthalmologist',
       'icon': AppVector.ophthalmologistIcon,
       'color': LinearGradient(
         begin: Alignment.topLeft,
@@ -57,6 +60,7 @@ class _HomeState extends State<Home> {
       ),
     },
     {
+      'specialization': 'gynecologist',
       'icon': AppVector.gynecologistIcon,
       'color': LinearGradient(
         begin: Alignment.topLeft,
@@ -173,6 +177,7 @@ class _HomeState extends State<Home> {
                 clipBehavior: Clip.none,
                 itemBuilder: (_, index) {
                   return AppContainer(
+                    onTap: ()=>GoRouter.of(context).pushNamed(RouteName.searchScreen,extra: quickList[index]['specialization']),
                     borderRadius: 10,
                     width: 90,
                     padding: EdgeInsets.all(25),
